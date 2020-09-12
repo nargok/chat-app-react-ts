@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import ChatList, { ChatListData } from "../components/chat-list";
 import Button from "../components/button";
+import CreateChatRoomModal from "../components/create-chat-room-modal";
 
 const data: ChatListData[] = [
   {
@@ -22,18 +23,53 @@ const data: ChatListData[] = [
   },
 ];
 
-class ChatListPage extends React.Component {
+interface ChatListPageProps {}
+
+interface ChatListPageState {
+  isCreateChatRoomModalShow: boolean;
+}
+
+class ChatListPage extends React.Component<
+  ChatListPageProps,
+  ChatListPageState
+> {
+  constructor(props: ChatListPageProps) {
+    super(props);
+    this.state = {
+      isCreateChatRoomModalShow: false,
+    };
+  }
+
+  displayCreateChatroomModal(): void {
+    this.setState({ isCreateChatRoomModalShow: true });
+  }
+
+  createChatRoom(): void {
+    this.setState({ isCreateChatRoomModalShow: false });
+  }
+
   render() {
     return (
       <ChatListPageStyle>
         <div className="title">
           <div className="chatRoomList">チャットルーム一覧</div>
           <div>
-            <Button name="チャットルームを作成" onClick={() => {}} primary />
+            <Button
+              name="チャットルームを作成"
+              onClick={() => this.displayCreateChatroomModal()}
+              primary
+            />
           </div>
         </div>
 
         <ChatList data={data} />
+
+        <CreateChatRoomModal
+          onClickButton={() => this.createChatRoom()}
+          onBlurText={() => {}}
+          onInputText={() => {}}
+          isShow={this.state.isCreateChatRoomModalShow}
+        />
       </ChatListPageStyle>
     );
   }
