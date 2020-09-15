@@ -39,3 +39,63 @@ export const joinRoom = (data: JoinRoom) =>
     type: ActionTypes.WebSocketEvents.WEBSOCEKT_JOIN_ROOM,
     ...data,
   });
+
+/**
+ * メッセージの送信
+ *
+ * @param data 送信データ
+ */
+export const sendMessage = (data: Conversation) =>
+  action(ActionTypes.WebSocketEvents.WEBSOCEKT_SEND, {
+    type: ActionTypes.WebSocketEvents.WEBSOCEKT_CONVERSATION,
+    ...data,
+  });
+
+/**
+ * チャットルーム一覧取得
+ *
+ */
+export const getRoomsList = () =>
+  action(ActionTypes.WebSocketEvents.WEBSOCEKT_SEND, {
+    type: ActionTypes.WebSocketEvents.WEBSOCEKT_GET_ROOMS_LIST,
+  });
+
+/**
+ * 現在のチャットルーム情報取得
+ *
+ * @param data 送信データ
+ */
+export const getCutrentRoom = (data: CurrentRoom) =>
+  action(ActionTypes.WebSocketEvents.WEBSOCEKT_SEND, {
+    type: ActionTypes.WebSocketEvents.WEBSOCEKT_GET_CURRENT_ROOM,
+    ...data,
+  });
+
+/**
+ * チャットルーム退室
+ *
+ */
+export const leaveRoom = () =>
+  action(ActionTypes.WebSocketEvents.WEBSOCEKT_SEND, {
+    type: ActionTypes.WebSocketEvents.WEBSOCEKT_LEAVE_ROOM,
+  });
+
+/**
+ * 現在のチャットルーム情報クリア
+ *
+ */
+export const clearCurrentRoom = () =>
+  action(ActionTypes.Events.NORMAL, {
+    type: ActionTypes.Events.CLEAR_CURRENT_ROOM,
+  });
+
+/**
+ * 現在のチャットルームIDの設定
+ *
+ * @param roomId ルームID
+ */
+export const setCurrentRoomId = (roomId: string) =>
+  action(ActionTypes.Events.NORMAL, {
+    type: ActionTypes.Events.SET_CURRENT_ROOM,
+    roomId,
+  });
